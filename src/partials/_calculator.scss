@@ -1,0 +1,21 @@
+.calculator {
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+  height: 300px;
+}
+
+.calculator__output {
+  flex-basis: 100%;
+  background-color: black;
+  color: white;
+  font-size: 32px;
+  text-align: end;
+}
+
+.calculator__input {
+  flex-basis: calc(100% / 3);
+  background-color: darkgray;
+  color: white;
+  font-size: 32px;
+}
