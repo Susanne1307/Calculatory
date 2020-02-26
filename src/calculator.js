@@ -4,6 +4,7 @@ const calculatorOutput = document.querySelector(".calculator__output");
 const calculatorInputs = document.querySelectorAll(".calculator__input");
 const calculatorResult = document.querySelector(".calculator__result");
 const calculatorClear = document.querySelector(".calculator__clear");
+const calculatorOperators = document.querySelectorAll(".calculator__operator");
 
 function add(numberOne, numberTwo) {
   return numberOne + numberTwo;
@@ -21,33 +22,49 @@ function multiply(numberOne, numberTwo) {
   return numberOne * numberTwo;
 }
 
-const numberOne = Number(calculatorInputs[5].innerText);
-const numberTwo = Number(calculatorInputs[6].innerText);
-// calculatorOutput.value = subtract(numberOne, numberTwo);
+let numberOne = 0;
+let numberTwo = 0;
 
-function handleClick() {
-  calculatorOutput.value = subtract(numberOne, numberTwo);
-  console.log("hallo");
+function handleResultClick() {
+  numberTwo = Number(calculatorOutput.value);
+  calculatorOutput.value = add(numberOne, numberTwo);
+  console.log(
+    "handleResultClick",
+    numberOne,
+    numberTwo,
+    calculatorOutput.value
+  );
 }
-calculatorResult.addEventListener("click", handleClick);
+calculatorResult.addEventListener("click", handleResultClick);
 
+// Clear-Funktion für C einfügen
 function clear() {
   calculatorOutput.value = "";
-  console.log("Moin");
 }
 calculatorClear.addEventListener("click", clear);
 
-// function handleInputClick() {
-//   console.log("Handle input click");
-// }
-// calculatorInputs[0].addEventListener("click", handleInputClick);
-// calculatorInputs[1].addEventListener("click", handleInputClick);
-
+// Tastenklick setzt betreffende Nummer in den Output
 function addInputEventListener(calculatorInput) {
   function handleCalculatorInputClick() {
-    calculatorOutput.value = calculatorInput.innerText;
+    calculatorOutput.value += calculatorInput.innerText;
+    console.log(
+      "handleOperatorInputClick",
+      numberOne,
+      numberTwo,
+      calculatorOutput.value
+    );
   }
 
   calculatorInput.addEventListener("click", handleCalculatorInputClick);
 }
 calculatorInputs.forEach(addInputEventListener);
+
+// Click-Option für Operators hinzufügen
+function addOperatorEventListener(calculatorOperator) {
+  function handleCalculatorOperatorClick() {
+    numberOne = Number(calculatorOutput.value);
+    clear();
+  }
+  calculatorOperator.addEventListener("click", handleCalculatorOperatorClick);
+}
+calculatorOperators.forEach(addOperatorEventListener);
