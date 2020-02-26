@@ -1,5 +1,5 @@
 {
-  "name": "Calculatory",
+  "name": "calculatory",
   "version": "1.0.0",
   "description": "Building a calculator",
   "main": "index.js",
