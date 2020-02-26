@@ -36,3 +36,18 @@ function clear() {
   console.log("Moin");
 }
 calculatorClear.addEventListener("click", clear);
+
+// function handleInputClick() {
+//   console.log("Handle input click");
+// }
+// calculatorInputs[0].addEventListener("click", handleInputClick);
+// calculatorInputs[1].addEventListener("click", handleInputClick);
+
+function addInputEventListener(calculatorInput) {
+  function handleCalculatorInputClick() {
+    calculatorOutput.value = calculatorInput.innerText;
+  }
+
+  calculatorInput.addEventListener("click", handleCalculatorInputClick);
+}
+calculatorInputs.forEach(addInputEventListener);
