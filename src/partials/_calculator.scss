@@ -1,21 +1,56 @@
 .calculator {
   display: flex;
   flex-wrap: wrap;
-  width: 400px;
-  height: 300px;
+  width: 500px;
+  height: 400px;
 }
 
 .calculator__output {
-  flex-basis: 100%;
+  flex-basis: calc(100% / 4 * 3);
   background-color: black;
-  color: white;
-  font-size: 32px;
+  color: whitesmoke;
   text-align: end;
+  padding: 2px 20px 2px 2px;
+  font-size: 25px;
+  outline: black;
+}
+
+.calculator__clear {
+  flex-basis: calc(100% / 4 * 1);
+  background-color: rgb(39, 39, 39);
+  color: whitesmoke;
+  font-size: 25px;
+  outline: black;
 }
 
 .calculator__input {
-  flex-basis: calc(100% / 3);
+  flex-basis: calc(100% / 4);
   background-color: darkgray;
-  color: white;
-  font-size: 32px;
+  color: whitesmoke;
+  font-size: 25px;
+  outline: black;
+}
+
+.calculator__input:active {
+  flex-basis: calc(100% / 4);
+  background-color: rgb(128, 127, 127);
+  color: whitesmoke;
+  font-size: 25px;
+  outline: black;
+}
+
+.calculator__result {
+  flex-basis: calc(100% / 4);
+  background-color: rgb(88, 88, 88);
+  color: whitesmoke;
+  font-size: 25px;
+  outline: black;
+}
+
+.calculator__operator {
+  flex-basis: calc(100% / 4);
+  background-color: rgb(88, 88, 88);
+  color: whitesmoke;
+  font-size: 25px;
+  outline: black;
 }
