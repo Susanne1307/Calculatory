@@ -1,4 +1,4 @@
-import { add, subtract, divide, multiply } from "./math.js";
+import { add } from "./math.js";
 
 const calculatorOutput = document.querySelector(".calculator__output");
 const calculatorInputs = document.querySelectorAll(".calculator__input");
@@ -8,7 +8,7 @@ const calculatorOperators = document.querySelectorAll(".calculator__operator");
 
 let numberOne = 0;
 let numberTwo = 0;
-let operator = "+";
+// let operator = "";
 
 // playground operators
 // function handleResultClick() {
