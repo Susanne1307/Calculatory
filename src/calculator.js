@@ -1,4 +1,4 @@
-"use strict";
+import { add, subtract, divide, multiply } from "./math.js";
 
 const calculatorOutput = document.querySelector(".calculator__output");
 const calculatorInputs = document.querySelectorAll(".calculator__input");
@@ -6,25 +6,30 @@ const calculatorResult = document.querySelector(".calculator__result");
 const calculatorClear = document.querySelector(".calculator__clear");
 const calculatorOperators = document.querySelectorAll(".calculator__operator");
 
-function add(numberOne, numberTwo) {
-  return numberOne + numberTwo;
-}
-
-function subtract(numberOne, numberTwo) {
-  return numberOne - numberTwo;
-}
-
-function divide(numberOne, numberTwo) {
-  return numberOne / numberTwo;
-}
-
-function multiply(numberOne, numberTwo) {
-  return numberOne * numberTwo;
-}
-
 let numberOne = 0;
 let numberTwo = 0;
+let operator = "+";
 
+// playground operators
+// function handleResultClick() {
+//   numberTwo = Number(calculatorOutput.value);
+
+//   if (calculatorOperator.innerText = "+") {
+//     calculatorOutput.value = add(numberOne, numberTwo);
+//     else if (calculatorOperator.innerText = "-") {calculatorOutput.value = subtract(numberOne, numberTwo);}
+//     else if (calculatorOperator.innerText = "*") {calculatorOutput.value = multiply(numberOne, numberTwo);}
+//     else ((calculatorOperator.innerText = "/") {calculatorOutput.value = divide(numberOne, numberTwo);}
+//     console.log(
+//       "handleResultClick",
+//       numberOne,
+//       numberTwo,
+//       calculatorOutput.value
+//     );
+//   }
+
+// calculatorResult.addEventListener("click", handleResultClick);
+
+// Result-Funktion für = einfügen
 function handleResultClick() {
   numberTwo = Number(calculatorOutput.value);
   calculatorOutput.value = add(numberOne, numberTwo);
@@ -59,7 +64,7 @@ function addInputEventListener(calculatorInput) {
 }
 calculatorInputs.forEach(addInputEventListener);
 
-// Click-Option für Operators hinzufügen
+// Click-Option auch für Operators hinzufügen
 function addOperatorEventListener(calculatorOperator) {
   function handleCalculatorOperatorClick() {
     numberOne = Number(calculatorOutput.value);
