@@ -1,75 +1,64 @@
 import { calculate } from "./math.js";
+import { appendParagraph } from "./log.js";
 
 const calculatorOutput = document.querySelector(".calculator__output");
 const calculatorInputs = document.querySelectorAll(".calculator__input");
 const calculatorResult = document.querySelector(".calculator__result");
 const calculatorClear = document.querySelector(".calculator__clear");
 const calculatorOperators = document.querySelectorAll(".calculator__operator");
+const logs = document.querySelector(".logs");
 
-let numberOne = 0;
-let numberTwo = 0;
-let operator = "";
+let numberOne = null;
+let operator = null;
+let waitingForNewNumber = true;
 
-// playground operators
-// function handleResultClick() {
-//   numberTwo = Number(calculatorOutput.value);
+function calculateResult() {
+  if (!operator) {
+    return;
+  }
+  const numberTwo = Number(calculatorOutput.value);
+  const result = calculate(numberOne, numberTwo, operator);
 
-//   if (calculatorOperator.innerText = "+") {
-//     calculatorOutput.value = add(numberOne, numberTwo);
-//     else if (calculatorOperator.innerText = "-") {calculatorOutput.value = subtract(numberOne, numberTwo);}
-//     else if (calculatorOperator.innerText = "*") {calculatorOutput.value = multiply(numberOne, numberTwo);}
-//     else ((calculatorOperator.innerText = "/") {calculatorOutput.value = divide(numberOne, numberTwo);}
-//     console.log(
-//       "handleResultClick",
-//       numberOne,
-//       numberTwo,
-//       calculatorOutput.value
-//     );
-//   }
+  const text = `${numberOne} ${operator} ${numberTwo} = ${result}`;
+  appendParagraph(text, logs);
 
-// calculatorResult.addEventListener("click", handleResultClick);
+  calculatorOutput.value = result;
 
-// Result-Funktion für = einfügen
-function handleResultClick() {
-  numberTwo = Number(calculatorOutput.value);
-  calculatorOutput.value = calculate(numberOne, numberTwo, operator);
-  console.log(
-    "handleResultClick",
-    numberOne,
-    numberTwo,
-    calculatorOutput.value
-  );
+  numberOne = result;
+  waitingForNewNumber = true;
+  operator = null;
 }
-calculatorResult.addEventListener("click", handleResultClick);
 
-// Clear-Funktion für C einfügen
+calculatorResult.addEventListener("click", calculateResult);
+
 function clear() {
   calculatorOutput.value = "";
 }
+
 calculatorClear.addEventListener("click", clear);
 
-// Tastenklick setzt betreffende Nummer in den Output
 function addInputEventListener(calculatorInput) {
   function handleCalculatorInputClick() {
+    if (waitingForNewNumber) {
+      numberOne = Number(calculatorOutput.value);
+      calculatorOutput.value = "";
+      waitingForNewNumber = false;
+    }
     calculatorOutput.value += calculatorInput.innerText;
-    console.log(
-      "handleOperatorInputClick",
-      numberOne,
-      numberTwo,
-      calculatorOutput.value
-    );
   }
 
   calculatorInput.addEventListener("click", handleCalculatorInputClick);
 }
+
 calculatorInputs.forEach(addInputEventListener);
 
-// Click-Option auch für Operators hinzufügen
 function addOperatorEventListener(calculatorOperator) {
   function handleCalculatorOperatorClick() {
-    numberOne = Number(calculatorOutput.value);
+    if (!waitingForNewNumber && operator) {
+      calculateResult();
+    }
     operator = calculatorOperator.innerText;
-    clear();
+    waitingForNewNumber = true;
   }
   calculatorOperator.addEventListener("click", handleCalculatorOperatorClick);
 }
