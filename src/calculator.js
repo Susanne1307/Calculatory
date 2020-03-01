@@ -12,10 +12,12 @@ let numberOne = null;
 let operator = null;
 let waitingForNewNumber = true;
 
+// Falls kein Operator angegeben wurde, passiert nichts.
 function calculateResult() {
   if (!operator) {
     return;
   }
+
   const numberTwo = Number(calculatorOutput.value);
   const result = calculate(numberOne, numberTwo, operator);
 
@@ -31,12 +33,7 @@ function calculateResult() {
 
 calculatorResult.addEventListener("click", calculateResult);
 
-function clear() {
-  calculatorOutput.value = "";
-}
-
-calculatorClear.addEventListener("click", clear);
-
+// Eine Zahl wird eingetippt. Falls wFNN=true, wird das aktuelle Outputfeld zu numberOne. Das Feld wird gecleared, wFNN wird false
 function addInputEventListener(calculatorInput) {
   function handleCalculatorInputClick() {
     if (waitingForNewNumber) {
@@ -52,6 +49,7 @@ function addInputEventListener(calculatorInput) {
 
 calculatorInputs.forEach(addInputEventListener);
 
+// Wenn waitingForNewNumber false ist und ein Operator eingegeben wurde
 function addOperatorEventListener(calculatorOperator) {
   function handleCalculatorOperatorClick() {
     if (!waitingForNewNumber && operator) {
@@ -63,3 +61,9 @@ function addOperatorEventListener(calculatorOperator) {
   calculatorOperator.addEventListener("click", handleCalculatorOperatorClick);
 }
 calculatorOperators.forEach(addOperatorEventListener);
+
+// Outputfeld wird wieder gecleared
+function clear() {
+  calculatorOutput.value = "";
+}
+calculatorClear.addEventListener("click", clear);
