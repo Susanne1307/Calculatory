@@ -1,5 +1,12 @@
+.calculator-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+}
+
 .calculator {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   width: 500px;
   height: 400px;
@@ -54,4 +61,10 @@
   color: whitesmoke;
   font-size: 25px;
   outline: black;
+}
+
+.logs-container {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
 }
